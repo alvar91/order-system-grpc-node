@@ -1,0 +1,16 @@
+version: '3.8'  # Указываем версию формата Docker Compose, используемую для конфигурации.
+
+services:  # Определяем список сервисов, которые будут запускаться в Docker Compose.
+  user-service:  # Определяем сервис user-service.
+    build: ./user-service  # Указываем путь к директории с Dockerfile для сборки образа user-service.
+    ports:
+      - "5001:5001"  # Прокидываем порт 5001 контейнера на порт 5001 хоста, чтобы приложение было доступно извне.
+    volumes:
+      - ./user-service:/usr/src/app  # Монтируем локальную директорию ./user-service в контейнер по пути /usr/src/app для синхронизации файлов.
+
+  order-service:  # Определяем сервис order-service.
+    build: ./order-service  # Указываем путь к директории с Dockerfile для сборки образа order-service.
+    ports:
+      - "5002:5002"  # Прокидываем порт 5002 контейнера на порт 5002 хоста, чтобы приложение было доступно извне.
+    volumes:
+      - ./order-service:/usr/src/app  # Монтируем локальную директорию ./order-service в контейнер по пути /usr/src/app для синхронизации файлов.
